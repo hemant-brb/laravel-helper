@@ -1,0 +1,17 @@
+{
+    "name": "devslane/helper",
+    "description": "Helper service.",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Hemant Saini",
+            "email": "HemantSaini95689@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Devslane\\": "src"
+        }
+    }
+}
