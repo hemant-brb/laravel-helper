@@ -9,6 +9,9 @@
             "email": "HemantSaini95689@gmail.com"
         }
     ],
+    "require-dev": {
+        "illuminate/support": "^5.8"
+    },
     "autoload": {
         "psr-4": {
             "Devslane\\": "src"
