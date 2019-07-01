@@ -12,7 +12,8 @@ namespace Devslane;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
-class Helper {
+class Helper
+{
     /**
      * Generates a unique string of given length
      *
@@ -21,7 +22,7 @@ class Helper {
      * @param string $start
      * @return string
      */
-    public function generateUniqueId($length = 9, $caseSensitive = false, $start = '') {
+    public static function generateUniqueId($length = 9, $caseSensitive = false, $start = '') {
         $startLength = strlen($start);
 
         $randomString = Str::random($length - $startLength);
@@ -39,7 +40,7 @@ class Helper {
      * @param int $digits
      * @return string
      */
-    public function generatePin($digits = 6) {
+    public static function generatePin($digits = 6) {
         $pin = "";
         for ($i = 0; $i < $digits; $i++) {
             $pin .= mt_rand(0, 9);
@@ -54,7 +55,7 @@ class Helper {
      * @param $value
      * @return bool
      */
-    public function isAssociativeArray($value) {
+    public static function isAssociativeArray($value) {
         if (!is_array($value)) {
             return false;
         }
@@ -68,7 +69,7 @@ class Helper {
      * @param $value
      * @return bool
      */
-    public function isSequentialArray($value) {
+    public static function isSequentialArray($value) {
         if (!is_array($value)) {
             return false;
         }
@@ -83,7 +84,7 @@ class Helper {
      * @param string $timezone
      * @return bool
      */
-    public function isTimezone($timezone) {
+    public static function isTimezone($timezone) {
         return in_array($timezone, array_merge(timezone_identifiers_list(), [
             // Add missing timezones here
             'Asia/Calcutta'
@@ -96,7 +97,7 @@ class Helper {
      * @param $value
      * @return string|null
      */
-    public function nullOrString($value) {
+    public static function nullOrString($value) {
         return (strlen(trim($value)) > 0) ? $value : null;
     }
 
@@ -106,7 +107,7 @@ class Helper {
      * @param $value
      * @return int|null
      */
-    public function nullOrInteger($value) {
+    public static function nullOrInteger($value) {
         return ($value === null) ? null : (integer)$value;
     }
 
@@ -116,7 +117,7 @@ class Helper {
      * @param $value
      * @return double|null
      */
-    public function nullOrDouble($value) {
+    public static function nullOrDouble($value) {
         return ($value === null) ? null : (double)$value;
     }
 
@@ -126,7 +127,7 @@ class Helper {
      * @param $value
      * @return bool|null
      */
-    public function nullOrBool($value) {
+    public static function nullOrBool($value) {
         return ($value === null) ? null : (bool)$value;
     }
 
@@ -138,7 +139,7 @@ class Helper {
      * @param string $default
      * @return string|null
      */
-    public function castString($value, $default) {
+    public static function castString($value, $default) {
         return is_string($value) ? (string)$value : $default;
     }
 
@@ -150,7 +151,7 @@ class Helper {
      * @param int $default
      * @return int|null
      */
-    public function castInteger($value, $default) {
+    public static function castInteger($value, $default) {
         return is_int($value) ? (integer)$value : $default;
     }
 
@@ -162,7 +163,7 @@ class Helper {
      * @param double $default
      * @return double|null
      */
-    public function castDouble($value, $default) {
+    public static function castDouble($value, $default) {
         return is_double($value) ? (double)$value : $default;
     }
 
@@ -174,7 +175,7 @@ class Helper {
      * @param bool $default
      * @return bool|null
      */
-    public function castBool($value, $default) {
+    public static function castBool($value, $default) {
         return is_double($value) ? (bool)$value : $default;
     }
 
@@ -184,7 +185,7 @@ class Helper {
      * @param int|null $value
      * @return bool
      */
-    public function isNullOrZero($value) {
+    public static function isNullOrZero($value) {
         if (is_null($value)) {
             return true;
         }
@@ -198,7 +199,7 @@ class Helper {
      * @param string|null $value
      * @return bool
      */
-    public function isNullOrEmpty($value) {
+    public static function isNullOrEmpty($value) {
         if (is_null($value)) {
             return true;
         }
@@ -213,7 +214,7 @@ class Helper {
      * @param int $decimalPlaces
      * @return float
      */
-    public function roundOff($number, $decimalPlaces = 2) {
+    public static function roundOff($number, $decimalPlaces = 2) {
         return (float)number_format((float)$number, $decimalPlaces, '.', '');
     }
 
@@ -225,7 +226,7 @@ class Helper {
      * @param string $prefix
      * @return string
      */
-    public function formatInt($number, $length, $prefix = "0") {
+    public static function formatInt($number, $length, $prefix = "0") {
         $stringNumber = "" . $number;
 
         $prefixLength = $length - strlen($stringNumber);
@@ -247,7 +248,7 @@ class Helper {
      * @param int $limit
      * @return int
      */
-    public function trimValue($value, $limit = 100) {
+    public static function trimValue($value, $limit = 100) {
         return $value < $limit ? $value : $limit;
     }
 
@@ -260,7 +261,7 @@ class Helper {
      * @param string $delimiter
      * @return int
      */
-    public function trimLength($value, $length = 99, $delimiter = '...') {
+    public static function trimLength($value, $length = 99, $delimiter = '...') {
         $actualLength = strlen($value);
 
         $output = $value;
@@ -282,7 +283,7 @@ class Helper {
      * @param bool $caseSensitive
      * @return bool
      */
-    public function hasSubString($hayStack, $needle, $caseSensitive = false) {
+    public static function hasSubString($hayStack, $needle, $caseSensitive = false) {
         $_haystack = $hayStack;
         $_needle   = $needle;
 
@@ -303,7 +304,7 @@ class Helper {
      * @param string $maskingCharacter
      * @return string
      */
-    public function mask($value, $start = 2, $maskingLength = null, $maskingCharacter = '*') {
+    public static function mask($value, $start = 2, $maskingLength = null, $maskingCharacter = '*') {
         if (is_null($maskingLength)) {
             $defaultLength = strlen($value) - 6;
 
@@ -327,7 +328,7 @@ class Helper {
      * @param bool $inCarbon
      * @return array
      */
-    public function generateDateRange(Carbon $startDate, Carbon $endDate, $inclusiveEnd = true, $inCarbon = false) {
+    public static function generateDateRange(Carbon $startDate, Carbon $endDate, $inclusiveEnd = true, $inCarbon = false) {
         $_start = $startDate->copy();
         $_end   = $endDate->copy();
 
@@ -358,7 +359,7 @@ class Helper {
      * @param $time
      * @return string
      */
-    public function formatTime12HR($time) {
+    public static function formatTime12HR($time) {
         if (!$time || !is_string($time)) {
             return $time;
         }
@@ -371,6 +372,16 @@ class Helper {
         $newHour = $isPM ? $hour - 12 : $hour;
         $suffix  = $isPM ? "PM" : "AM";
 
-        return $this->formatInt($newHour, 2) . ":" . $this->formatInt($minutes, 2) . " " . $suffix;
+        return Helper::formatInt($newHour, 2) . ":" . Helper::formatInt($minutes, 2) . " " . $suffix;
+    }
+
+
+    /**
+     * @param $firstName
+     * @param string $lastName
+     * @return string
+     */
+    public static function getFullName($firstName, $lastName = "") {
+        return $lastName === "" ? $firstName : $firstName . ' ' . $lastName;
     }
 }
