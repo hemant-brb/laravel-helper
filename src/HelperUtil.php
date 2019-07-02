@@ -12,7 +12,7 @@ namespace Devslane;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
-class Helper
+class HelperUtil
 {
     /**
      * Generates a unique string of given length
@@ -372,7 +372,7 @@ class Helper
         $newHour = $isPM ? $hour - 12 : $hour;
         $suffix  = $isPM ? "PM" : "AM";
 
-        return Helper::formatInt($newHour, 2) . ":" . Helper::formatInt($minutes, 2) . " " . $suffix;
+        return HelperUtil::formatInt($newHour, 2) . ":" . HelperUtil::formatInt($minutes, 2) . " " . $suffix;
     }
 
 
