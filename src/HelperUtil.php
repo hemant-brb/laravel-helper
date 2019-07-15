@@ -132,6 +132,32 @@ class HelperUtil
     }
 
     /**
+     * Return null or string
+     *
+     * @param $value
+     * @return null|string
+     */
+    public static function nullOrDateTimeString($value) {
+        if (!$value instanceof Carbon && !is_null($value)) {
+            $value = Carbon::parse($value);
+        }
+
+        return is_null($value) ? null : $value->toDateTimeString();
+    }
+
+    /**
+     * @param $value
+     * @return string|null
+     */
+    public static function nullOrDateString($value) {
+        if (!$value instanceof Carbon && !is_null($value)) {
+            $value = Carbon::parse($value);
+        }
+
+        return is_null($value) ? null : $value->toDateString();
+    }
+
+    /**
      * Casts to string or returns $default
      * if $value passed is not string.
      *
