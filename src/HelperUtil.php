@@ -1,10 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: piyushkantm
- * Date: 13/03/19
- * Time: 12:44 PM
+ * User: Hemant Saini
+ * Date: Mon, 15 Jul 2019 10:07:41 +0000
  */
+
 
 namespace Devslane;
 
@@ -12,6 +11,10 @@ namespace Devslane;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
+/**
+ * Class HelperUtil
+ * @package Devslane
+ */
 class HelperUtil
 {
     /**
@@ -410,4 +413,63 @@ class HelperUtil
     public static function getFullName($firstName, $lastName = "") {
         return $lastName === "" ? $firstName : $firstName . ' ' . $lastName;
     }
+
+
+    const OS_UNKNOWN = 1;
+    const OS_WIN     = 2;
+    const OS_LINUX   = 3;
+    const OS_OSX     = 4;
+
+    /**
+     * @return int
+     *
+     * Get the Env Os..
+     */
+    public static function getOS() {
+        switch (true) {
+            case stristr(PHP_OS, 'DAR'):
+                return self::OS_OSX;
+            case stristr(PHP_OS, 'WIN'):
+                return self::OS_WIN;
+            case stristr(PHP_OS, 'LINUX'):
+                return self::OS_LINUX;
+            default :
+                return self::OS_UNKNOWN;
+        }
+    }
+
+    /**
+     * @param $cmd
+     * @return array
+     *
+     * returns full output and error logs.
+     */
+    public static function exec($cmd) {
+
+        $proc = proc_open($cmd,
+            array(
+                0 => array('pipe', 'r'),
+                1 => array('pipe', 'w'),
+                2 => array('pipe', 'w')
+            ), $pipes);
+
+        fwrite($pipes[0], '');
+        fclose($pipes[0]);
+
+        $stdout = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+
+        $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[2]);
+
+        $rtn = proc_close($proc);
+
+        return array(
+            'stdout' => $stdout,
+            'stderr' => $stderr,
+            'return' => $rtn
+        );
+    }
+
+
 }
