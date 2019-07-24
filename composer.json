@@ -9,8 +9,11 @@
             "email": "HemantSaini95689@gmail.com"
         }
     ],
+    "require": {
+        "ext-json": "*"
+    },
     "require-dev": {
-        "illuminate/support": "^5.8"
+        "illuminate/support": "^5.4"
     },
     "autoload": {
         "psr-4": {
